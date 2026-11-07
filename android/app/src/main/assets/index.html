@@ -74,7 +74,7 @@ const safeRead=(key,fallback)=>{try{const v=JSON.parse(localStorage.getItem(key)
 let settings=safeRead(STORAGE.settings,{});
 if(!settings||typeof settings!=='object'||Array.isArray(settings))settings={};
 let language=['ru','en'].includes(settings.language)?settings.language:((navigator.language||'en').toLowerCase().startsWith('ru')?'ru':'en');
-let accent=Object.hasOwn(colors,settings.accent)?settings.accent:'blue';
+let accent=Object.prototype.hasOwnProperty.call(colors,settings.accent)?settings.accent:'blue';
 let theme=['auto','light','dark'].includes(settings.theme)?settings.theme:'auto';
 let expression='',justEvaluated=false,history=[],memory=Number.isFinite(settings.memory)?settings.memory:0,hasMemory=!!settings.hasMemory;
 let toastTimer=0;
@@ -82,7 +82,7 @@ const tr=k=>t[language][k];
 function persistSettings(){try{localStorage.setItem(STORAGE.settings,JSON.stringify({language,accent,theme,memory,hasMemory}))}catch{}}
 function toast(s){const el=$('toast');el.textContent=s;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),1900)}
 function setTheme(v=theme){theme=v;const dark=v==='dark'||(v==='auto'&&matchMedia('(prefers-color-scheme: dark)').matches);document.body.classList.toggle('dark',dark);$('autoTheme').classList.toggle('active',v==='auto');$('lightTheme').classList.toggle('active',v==='light');$('darkTheme').classList.toggle('active',v==='dark');document.querySelector('meta[name="theme-color"]').content=dark?'#181916':'#f5f5f0';persistSettings()}
-function setAccent(v){if(!Object.hasOwn(colors,v))return;accent=v;document.documentElement.style.setProperty('--accent',colors[v]);document.querySelectorAll('.color-btn').forEach(b=>b.classList.toggle('active',b.dataset.color===v));persistSettings()}
+function setAccent(v){if(!Object.prototype.hasOwnProperty.call(colors,v))return;accent=v;document.documentElement.style.setProperty('--accent',colors[v]);document.querySelectorAll('.color-btn').forEach(b=>b.classList.toggle('active',b.dataset.color===v));persistSettings()}
 function setLanguage(v){if(!t[v])return;language=v;document.documentElement.lang=v;document.querySelectorAll('[data-t]').forEach(el=>{const value=tr(el.dataset.t);if(typeof value==='string')el.textContent=value});$('ruBtn').style.background=v==='ru'?'var(--accent)':'transparent';$('enBtn').style.background=v==='en'?'var(--accent)':'transparent';persistSettings();render()}
 function format(n){if(!Number.isFinite(n))throw Error('range');if(Object.is(n,-0))n=0;return Number(n.toPrecision(12)).toString()}
 function tokenize(source){
