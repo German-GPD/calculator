@@ -16,8 +16,10 @@ class MainActivity : Activity() {
         webView = WebView(this).apply {
             settings.javaScriptEnabled = true
             settings.domStorageEnabled = true
-            settings.allowFileAccess = true
-            settings.allowContentAccess = true
+            settings.allowFileAccess = true // Required only to load the bundled app from android_asset.
+            settings.allowContentAccess = false
+            settings.allowFileAccessFromFileURLs = false
+            settings.allowUniversalAccessFromFileURLs = false
             settings.setSupportZoom(false)
             webViewClient = WebViewClient()
             webChromeClient = WebChromeClient()
