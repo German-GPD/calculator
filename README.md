@@ -11,7 +11,9 @@ A lightweight everyday calculator by **GERMAN'$ CODE TEAM**.
 ## Features
 
 - Addition, subtraction, multiplication and division
-- Parentheses, decimals, unary signs and percentages
+- Parentheses, decimals, unary signs, percentages and powers
+- Common-fraction display with mixed-number formatting (toggle `a/b`)
+- Scientific functions: square/cube-style powers, factorial, square root, trigonometry (degrees), logarithms, absolute value, π and e
 - Reciprocal, square, square root and sign toggle
 - Memory keys (MC, MR, M+, M−)
 - Live expression preview, copy result and calculation history
@@ -24,7 +26,7 @@ A lightweight everyday calculator by **GERMAN'$ CODE TEAM**.
 ## Safety and calculation limits
 
 - Expressions are parsed by a small arithmetic parser; JavaScript `eval` and dynamic code execution are not used.
-- Input is limited to 256 characters, 128 tokens and 32 nested parentheses.
+- Input is limited to 256 characters, 128 tokens and 32 nested parentheses. Factorials are limited to integers from 0 to 170; invalid logarithms, roots, tangents and non-finite results are rejected.
 - Division by zero and non-finite results are rejected.
 - History and preferences remain in local browser storage; no account, analytics, or remote API is used.
 
@@ -40,15 +42,15 @@ Open the `android/` directory in Android Studio, allow Gradle sync, then use:
 
 - **Build → Build Bundle(s) / APK(s) → Build APK(s)**
 
-Or from the `android/` directory:
+Or download the automatically built debug APK from the **Build Android APK** workflow's Artifacts section in GitHub Actions. The workflow runs on pushes to `main` and can also be started manually (`workflow_dispatch`). Artifacts are retained for 30 days.
+
+For a local build from the `android/` directory, install Gradle 8.11.1 and run:
 
 ```bash
-gradle assembleDebug
+gradle --no-daemon assembleDebug
 ```
 
-The debug APK is generated at:
-
-`android/app/build/outputs/apk/debug/app-debug.apk`
+The debug APK is generated at `android/app/build/outputs/apk/debug/app-debug.apk`.
 
 A release APK should be built with your own signing key before distribution.
 
