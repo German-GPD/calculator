@@ -3,7 +3,7 @@
     <application
         android:allowBackup="false"
         android:label="Calculator"
-        android:theme="@android:style/Theme.Material.Light.NoActionBar"
+        android:theme="@android:style/Theme.Material.DayNight.NoActionBar"
         android:usesCleartextTraffic="false">
         <activity
             android:name=".MainActivity"
