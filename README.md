@@ -12,13 +12,21 @@ A lightweight everyday calculator by **GERMAN'$ CODE TEAM**.
 
 - Addition, subtraction, multiplication and division
 - Parentheses, decimals, unary signs and percentages
-- Live expression preview and calculation history
-- Local history storage on the device
-- Keyboard input on desktop
-- Automatic light/dark theme based on the system
-- Selectable accent colors
-- Russian and English interface
-- Responsive layout
+- Reciprocal, square, square root and sign toggle
+- Memory keys (MC, MR, M+, M−)
+- Live expression preview, copy result and calculation history
+- Local history and preferences stored on the device
+- Keyboard input on desktop; touch-friendly controls on mobile
+- Automatic light/dark theme, with optional manual override
+- Five selectable accent colors; Russian and English interface
+- Responsive layout and offline Android WebView assets
+
+## Safety and calculation limits
+
+- Expressions are parsed by a small arithmetic parser; JavaScript `eval` and dynamic code execution are not used.
+- Input is limited to 256 characters, 128 tokens and 32 nested parentheses.
+- Division by zero and non-finite results are rejected.
+- History and preferences remain in local browser storage; no account, analytics, or remote API is used.
 
 ## Run the web version
 
