@@ -17,4 +17,9 @@ for (const [, id] of source.matchAll(/\$\('([^']+)'\)/g)) {
 assert.match(source, /source\.length>256/, 'Expression length limit is missing');
 assert.match(source, /tokens\.length>128/, 'Token limit is missing');
 assert.match(source, /depth>32/, 'Parenthesis nesting limit is missing');
+assert.match(source, /function toFraction/, 'Fraction conversion is missing');
+assert.match(source, /function factorial/, 'Factorial function is missing');
+assert.match(source, /function calculate/, 'Scientific parser is missing');
+assert.doesNotMatch(web, /GERA|Гера|🦉|owl-card|owl-avatar/i, 'The old mascot must be completely removed');
+for (const feature of ['scientificRow', 'fractionMode', 'data-value="sin("', 'data-value="π"']) assert.ok(web.includes(feature), 'Missing feature: ' + feature);
 console.log('Calculator validation passed: syntax, DOM IDs, parser limits, safe rendering and Android asset parity.');
