@@ -22,18 +22,32 @@
 .dev-card{margin-top:28px;padding:18px 15px;border:1px solid var(--line);background:var(--panel)}.dev-eyebrow{font:9px "Courier New",monospace;color:var(--muted);letter-spacing:1px}.dev-name{font-size:clamp(25px,7vw,37px);line-height:1.1;font-weight:950;letter-spacing:-1.5px;margin-top:8px}.dev-role{font-size:12px;color:var(--muted);margin-top:5px}.dev-bottom{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:17px;padding-top:13px;border-top:1px solid var(--line)}.telegram{display:inline-flex;align-items:center;gap:7px;padding:10px 12px;background:var(--accent);color:#20221e;border:1px solid var(--text);font:11px "Courier New",monospace;text-decoration:none}.dev-sign{font:9px "Courier New",monospace;color:var(--muted);text-align:right}.footer{display:flex;justify-content:space-between;gap:12px;margin-top:19px;padding-top:13px;border-top:1px solid var(--line);font:9px "Courier New",monospace;color:var(--muted)}
 .backdrop{position:fixed;inset:0;z-index:20;background:#0008;display:none;align-items:flex-end;justify-content:center;padding:12px;padding-bottom:calc(12px + env(safe-area-inset-bottom,0px))}.backdrop.open{display:flex}.dialog{width:min(100%,460px);max-height:90dvh;overflow:auto;background:var(--panel);border:1px solid var(--line);padding:21px;box-shadow:4px 4px 0 #0002;animation:slideUp .17s ease}@keyframes slideUp{from{opacity:.5;transform:translateY(9px)}to{opacity:1;transform:none}}.dialog-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}.dialog-title{font-size:20px;font-weight:900;letter-spacing:-.5px;margin-top:5px}.close-btn{width:32px;height:32px;background:transparent;border:1px solid var(--line);font-size:19px}.setting-row{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:20px 0}.setting-name{font-size:13px;font-weight:750}.setting-desc{font-size:10px;color:var(--muted);margin-top:3px}.colors{display:flex;gap:11px;flex-wrap:wrap;margin-top:13px}.color-btn{width:27px;height:27px;border:1px solid #7777;outline:1px solid transparent;outline-offset:3px}.color-btn.active{outline-color:var(--text)}[data-color="green"]{background:#d8ff42}[data-color="blue"]{background:#8db9ff}[data-color="red"]{background:#ff9588}[data-color="yellow"]{background:#ffd96b}[data-color="purple"]{background:#c5a5ff}.dialog-note{margin-top:24px;padding-top:13px;border-top:1px solid var(--line);font:9px/1.8 "Courier New",monospace;color:var(--muted)}.toast{position:fixed;z-index:50;bottom:calc(20px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);padding:11px 15px;background:var(--text);color:var(--bg);font:11px "Courier New",monospace;display:none;max-width:90%;text-align:center}.toast.show{display:block}
 @media(min-width:560px){.app{padding-top:30px}.keypad{gap:8px}.key{min-height:65px}.backdrop{align-items:center}}@media(max-width:360px){.app{padding-left:14px;padding-right:14px}.keypad{gap:5px}.key{min-height:52px;font-size:18px}.owl-avatar{width:51px;height:51px;font-size:29px}.display-card{padding:13px}.result{font-size:42px}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+/* CALCULATOR 2.0 — School-Calc family */
+.copy-result{border:1px solid var(--line);background:transparent;color:var(--muted);padding:4px 7px;font:9px "Courier New",monospace}
+.copy-result:hover{border-color:var(--text);color:var(--text)}
+.memory-row{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin:-3px 0 8px}
+.memory-key{min-height:32px;background:transparent;border:1px solid var(--line);color:var(--muted);font:10px "Courier New",monospace}
+.memory-key:hover{border-color:var(--text);color:var(--text)}
+.keypad{grid-template-columns:repeat(4,minmax(0,1fr))}
+.key.equals{grid-column:auto!important;min-height:59px}
+.theme-segment{display:flex;gap:3px;padding:3px;background:var(--bg);border:1px solid var(--line)}
+.theme-segment button{padding:7px 8px;border:1px solid transparent;background:transparent;font:9px "Courier New",monospace;color:var(--muted)}
+.theme-segment button.active{background:var(--accent);color:#20221e;border-color:var(--text)}
+.key:disabled,.memory-key:disabled{opacity:.45;cursor:not-allowed}
+@media(max-width:360px){.memory-row{gap:5px}.memory-key{min-height:29px}.theme-segment button{padding:7px 5px}}
 </style>
 </head>
 <body>
 <div id="splash"><div class="splash-tag">[ GERMAN'$ TEAM CODING ]</div><div class="splash-title">WELCOME</div><div class="splash-sub">IT'S CALCULATOR</div><div class="splash-art" aria-hidden="true">🦉</div><div class="splash-bottom">DEV BY GERMAN'$ TEAM CODING<div class="load-track"><div class="load-fill"></div></div></div></div>
 <main class="app">
-<header class="topbar"><div class="brand"><div class="brand-icon">C_</div><div><div class="brand-name">CALCULATOR</div><div class="brand-sub">EVERYDAY CALCULATOR / 1.0.0</div></div></div><button class="icon-btn" id="settingsOpen" aria-label="Settings">⚙</button></header>
-<section class="hero"><div class="hero-top"><div class="label"><span class="pixel"></span><span data-t="calculator">КАЛЬКУЛЯТОР</span></div><div class="tag">STANDARD / 01</div></div><div class="display-card" aria-live="polite"><div class="expression mono" id="expression"> </div><div class="result" id="result">0</div><div class="display-foot"><span id="displayStatus">GERA / READY</span><span>LOCAL • OFFLINE</span></div></div></section>
+<header class="topbar"><div class="brand"><div class="brand-icon">C_</div><div><div class="brand-name">CALCULATOR</div><div class="brand-sub">EVERYDAY CALCULATOR / 2.0.0</div></div></div><button class="icon-btn" id="settingsOpen" aria-label="Settings">⚙</button></header>
+<section class="hero"><div class="hero-top"><div class="label"><span class="pixel"></span><span data-t="calculator">КАЛЬКУЛЯТОР</span></div><div class="tag">STANDARD / 01</div></div><div class="display-card" aria-live="polite"><div class="expression mono" id="expression"> </div><div class="result" id="result">0</div><div class="display-foot"><span id="displayStatus">GERA / READY</span><button class="copy-result" id="copyResult" type="button">↗ COPY</button><span>LOCAL • OFFLINE</span></div></div></section>
 <section class="owl-card"><div class="owl-avatar" id="owlAvatar">🦉</div><div><div class="owl-status" id="owlStatus">GERA / READY</div><div class="owl-title" id="owlTitle">Привет, я Гера.</div><div class="owl-message" id="owlMessage">Вводи выражение — я помогу посчитать.</div></div></section>
 <div class="divider"></div>
 <section><div class="section-head"><div class="label"><span class="pixel"></span><span data-t="keypad">КЛАВИАТУРА</span></div><div class="hint">[ 0—9 / + − × ÷ ]</div></div>
-<div class="keypad" id="keypad">
-<button class="key utility" data-action="clear">AC</button><button class="key utility" data-value="(">( )</button><button class="key utility" data-value="%">%</button><button class="key operator" data-value="÷">÷</button>
+<div class="memory-row" id="memoryRow"><button class="memory-key" data-action="mc">MC</button><button class="memory-key" data-action="mr">MR</button><button class="memory-key" data-action="mplus">M+</button><button class="memory-key" data-action="mminus">M−</button></div><div class="keypad" id="keypad">
+<button class="key utility" data-action="clear">AC</button><button class="key utility" data-action="backspace">⌫</button><button class="key utility" data-value="()">()</button><button class="key operator" data-value="÷">÷</button>
 <button class="key" data-value="7">7</button><button class="key" data-value="8">8</button><button class="key" data-value="9">9</button><button class="key operator" data-value="×">×</button>
 <button class="key" data-value="4">4</button><button class="key" data-value="5">5</button><button class="key" data-value="6">6</button><button class="key operator" data-value="−">−</button>
 <button class="key" data-value="1">1</button><button class="key" data-value="2">2</button><button class="key" data-value="3">3</button><button class="key operator" data-value="+">+</button>
@@ -43,78 +57,97 @@
 <section class="history"><div class="section-head"><div class="label"><span class="pixel"></span><span data-t="history">ИСТОРИЯ ВЫЧИСЛЕНИЙ</span></div><div class="history-count" id="historyCount">0</div></div><div class="history-list" id="historyList"></div></section>
 <div class="bottom"><div class="session-info"><div>● <span data-t="localSession">ЛОКАЛЬНАЯ СЕССИЯ</span></div><div data-t="historySaved">ИСТОРИЯ ХРАНИТСЯ НА УСТРОЙСТВЕ</div></div><button class="clean-btn" id="cleanBtn">↺ CLEAN</button></div>
 <section class="dev-card"><div class="dev-eyebrow">INDEPENDENT DEVELOPER / 01</div><div class="dev-name">GERMAN</div><div class="dev-role" data-t="devRole">Разработчик CALCULATOR</div><div class="dev-bottom"><a class="telegram" href="https://t.me/german_gpd" target="_blank" rel="noopener">↗ TELEGRAM @german_gpd</a><div class="dev-sign">MADE WITH CARE<br>GERMAN'$ CODE TEAM</div></div></section>
-<footer class="footer"><span>CALCULATOR / v1.0.0</span><span>GERMAN'$ CODE TEAM ♥</span></footer>
+<footer class="footer"><span>CALCULATOR / v2.0.0</span><span>GERMAN'$ CODE TEAM ♥</span></footer>
 </main>
-<div class="backdrop" id="settingsBackdrop"><section class="dialog" role="dialog" aria-modal="true" aria-labelledby="settingsTitle"><div class="dialog-head"><div><div class="label"><span class="pixel"></span>CONFIG / 01</div><div class="dialog-title" id="settingsTitle" data-t="settings">Настройки</div></div><button class="close-btn" id="settingsClose" aria-label="Close">×</button></div><div class="setting-row"><div><div class="setting-name" data-t="appearance">Оформление</div><div class="setting-desc" data-t="appearanceDesc">Следует настройкам устройства</div></div><div class="tag" id="themeMode">AUTO</div></div><div class="setting-row"><div><div class="setting-name" data-t="accent">Акцентный цвет</div><div class="setting-desc" data-t="accentDesc">Выбери свой цвет</div></div></div><div class="colors"><button class="color-btn" data-color="green" aria-label="Green"></button><button class="color-btn" data-color="blue" aria-label="Blue"></button><button class="color-btn" data-color="red" aria-label="Red"></button><button class="color-btn" data-color="yellow" aria-label="Yellow"></button><button class="color-btn" data-color="purple" aria-label="Purple"></button></div><div class="setting-row" style="margin-top:28px"><div><div class="setting-name" data-t="language">Язык</div><div class="setting-desc" data-t="languageDesc">Язык интерфейса</div></div><div style="display:flex;gap:4px"><button class="clean-btn" id="ruBtn">RU</button><button class="clean-btn" id="enBtn">EN</button></div></div><div class="dialog-note">CALCULATOR / 1.0.0<br>NO ACCOUNT. NO CLOUD. YOUR HISTORY STAYS ON THIS DEVICE.</div></section></div>
+<div class="backdrop" id="settingsBackdrop"><section class="dialog" role="dialog" aria-modal="true" aria-labelledby="settingsTitle"><div class="dialog-head"><div><div class="label"><span class="pixel"></span>CONFIG / 01</div><div class="dialog-title" id="settingsTitle" data-t="settings">Настройки</div></div><button class="close-btn" id="settingsClose" aria-label="Close">×</button></div><div class="setting-row"><div><div class="setting-name" data-t="appearance">Оформление</div><div class="setting-desc" data-t="appearanceDesc">Следует настройкам устройства</div></div><div class="theme-segment"><button id="autoTheme" class="active">AUTO</button><button id="lightTheme">LIGHT</button><button id="darkTheme">DARK</button></div></div><div class="setting-row"><div><div class="setting-name" data-t="accent">Акцентный цвет</div><div class="setting-desc" data-t="accentDesc">Выбери свой цвет</div></div></div><div class="colors"><button class="color-btn" data-color="green" aria-label="Green"></button><button class="color-btn" data-color="blue" aria-label="Blue"></button><button class="color-btn" data-color="red" aria-label="Red"></button><button class="color-btn" data-color="yellow" aria-label="Yellow"></button><button class="color-btn" data-color="purple" aria-label="Purple"></button></div><div class="setting-row" style="margin-top:28px"><div><div class="setting-name" data-t="language">Язык</div><div class="setting-desc" data-t="languageDesc">Язык интерфейса</div></div><div style="display:flex;gap:4px"><button class="clean-btn" id="ruBtn">RU</button><button class="clean-btn" id="enBtn">EN</button></div></div><div class="dialog-note">CALCULATOR / 1.0.0<br>NO ACCOUNT. NO CLOUD. YOUR HISTORY STAYS ON THIS DEVICE.</div></section></div>
 <div class="toast" id="toast" role="status"></div>
 <script>
 (()=>{'use strict';
 const $=id=>document.getElementById(id);
-const translations={
-ru:{calculator:'КАЛЬКУЛЯТОР',keypad:'КЛАВИАТУРА',history:'ИСТОРИЯ ВЫЧИСЛЕНИЙ',localSession:'ЛОКАЛЬНАЯ СЕССИЯ',historySaved:'ИСТОРИЯ ХРАНИТСЯ НА УСТРОЙСТВЕ',settings:'Настройки',appearance:'Оформление',appearanceDesc:'Следует настройкам устройства',accent:'Акцентный цвет',accentDesc:'Выбери свой цвет',language:'Язык',languageDesc:'Язык интерфейса',devRole:'Разработчик CALCULATOR',empty:'ПОКА НЕТ ВЫЧИСЛЕНИЙ',ready:'Вводи выражение — я помогу посчитать.',hello:'Привет, я Гера.',calculated:'Готово! Результат на экране.',error:'Не получилось вычислить. Проверь выражение.',cleared:'Всё очищено.',clearConfirm:'Очистить всю историю вычислений?',copied:'Результат скопирован.',count:n=>n+' '+(n===1?'вычисление':n<5?'вычисления':'вычислений')},
-en:{calculator:'CALCULATOR',keypad:'KEYPAD',history:'CALCULATION HISTORY',localSession:'LOCAL SESSION',historySaved:'HISTORY IS STORED ON THIS DEVICE',settings:'Settings',appearance:'Appearance',appearanceDesc:'Follows your device settings',accent:'Accent color',accentDesc:'Choose your color',language:'Language',languageDesc:'Interface language',devRole:'CALCULATOR developer',empty:'NO CALCULATIONS YET',ready:'Enter an expression — I’ll do the math.',hello:'Hi, I’m Gera.',calculated:'Done! The result is on the display.',error:'Could not calculate. Check the expression.',cleared:'Everything cleared.',clearConfirm:'Clear all calculation history?',copied:'Result copied.',count:n=>n+' '+(n===1?'calculation':'calculations')}
-};
-let language=(navigator.language||'en').toLowerCase().startsWith('ru')?'ru':'en';
-let expression='',justEvaluated=false,history=[];
+const STORAGE={history:'calculator-history-v2',settings:'calculator-settings-v2'};
 const colors={green:'#d8ff42',blue:'#8db9ff',red:'#ff9588',yellow:'#ffd96b',purple:'#c5a5ff'};
-const accentNames=Object.keys(colors);
-let accent=accentNames[Math.floor(Math.random()*accentNames.length)];
-let toastTimer;
-const tr=k=>translations[language][k];
-function toast(s){$('toast').textContent=s;$('toast').classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').classList.remove('show'),1900)}
-function setTheme(){const dark=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;document.body.classList.toggle('dark',dark);$('themeMode').textContent='AUTO / '+(dark?'DARK':'LIGHT');document.querySelector('meta[name="theme-color"]').content=dark?'#181916':'#f5f5f0'}
-function setAccent(v){accent=v;document.documentElement.style.setProperty('--accent',colors[v]);document.querySelectorAll('.color-btn').forEach(b=>b.classList.toggle('active',b.dataset.color===v))}
-function format(n){if(!Number.isFinite(n))throw Error('non-finite');if(Object.is(n,-0))n=0;return Number(n.toPrecision(12)).toString()}
-function tokenize(src){
- const s=src.replace(/×/g,'*').replace(/÷/g,'/').replace(/−/g,'-').replace(/,/g,'.').replace(/\s+/g,'');
+const t={
+ru:{calculator:'КАЛЬКУЛЯТОР',keypad:'КЛАВИАТУРА',history:'ИСТОРИЯ ВЫЧИСЛЕНИЙ',localSession:'ЛОКАЛЬНАЯ СЕССИЯ',historySaved:'ИСТОРИЯ ХРАНИТСЯ НА УСТРОЙСТВЕ',settings:'Настройки',appearance:'Оформление',appearanceDesc:'Авто — как на устройстве',accent:'Акцентный цвет',accentDesc:'Выбери свой цвет',language:'Язык',languageDesc:'Язык интерфейса',devRole:'Разработчик CALCULATOR',empty:'ПОКА НЕТ ВЫЧИСЛЕНИЙ',ready:'Вводи выражение — я помогу посчитать.',hello:'Привет, я Гера.',calculated:'Готово! Ответ уже на экране.',error:'Не получилось вычислить.',cleared:'История очищена.',clearConfirm:'Очистить всю историю вычислений?',copied:'Результат скопирован.',memoryClear:'Память очищена.',memoryEmpty:'Память пуста.',memorySaved:'Значение сохранено в памяти.',count:n=>n+' '+(n===1?'вычисление':n<5?'вычисления':'вычислений')},
+en:{calculator:'CALCULATOR',keypad:'KEYPAD',history:'CALCULATION HISTORY',localSession:'LOCAL SESSION',historySaved:'HISTORY IS STORED ON THIS DEVICE',settings:'Settings',appearance:'Appearance',appearanceDesc:'Auto follows your device',accent:'Accent color',accentDesc:'Choose your color',language:'Language',languageDesc:'Interface language',devRole:'CALCULATOR developer',empty:'NO CALCULATIONS YET',ready:'Enter an expression — I’ll do the math.',hello:'Hi, I’m Gera.',calculated:'Done! The answer is on the display.',error:'Could not calculate this expression.',cleared:'History cleared.',clearConfirm:'Clear all calculation history?',copied:'Result copied.',memoryClear:'Memory cleared.',memoryEmpty:'Memory is empty.',memorySaved:'Value saved to memory.',count:n=>n+' '+(n===1?'calculation':'calculations')}
+};
+const safeRead=(key,fallback)=>{try{const v=JSON.parse(localStorage.getItem(key));return v??fallback}catch{return fallback}};
+let settings=safeRead(STORAGE.settings,{});
+if(!settings||typeof settings!=='object'||Array.isArray(settings))settings={};
+let language=['ru','en'].includes(settings.language)?settings.language:((navigator.language||'en').toLowerCase().startsWith('ru')?'ru':'en');
+let accent=Object.hasOwn(colors,settings.accent)?settings.accent:'blue';
+let theme=['auto','light','dark'].includes(settings.theme)?settings.theme:'auto';
+let expression='',justEvaluated=false,history=[],memory=Number.isFinite(settings.memory)?settings.memory:0,hasMemory=!!settings.hasMemory;
+let toastTimer=0;
+const tr=k=>t[language][k];
+function persistSettings(){try{localStorage.setItem(STORAGE.settings,JSON.stringify({language,accent,theme,memory,hasMemory}))}catch{}}
+function toast(s){const el=$('toast');el.textContent=s;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),1900)}
+function setTheme(v=theme){theme=v;const dark=v==='dark'||(v==='auto'&&matchMedia('(prefers-color-scheme: dark)').matches);document.body.classList.toggle('dark',dark);$('autoTheme').classList.toggle('active',v==='auto');$('lightTheme').classList.toggle('active',v==='light');$('darkTheme').classList.toggle('active',v==='dark');document.querySelector('meta[name="theme-color"]').content=dark?'#181916':'#f5f5f0';persistSettings()}
+function setAccent(v){if(!Object.hasOwn(colors,v))return;accent=v;document.documentElement.style.setProperty('--accent',colors[v]);document.querySelectorAll('.color-btn').forEach(b=>b.classList.toggle('active',b.dataset.color===v));persistSettings()}
+function setLanguage(v){if(!t[v])return;language=v;document.documentElement.lang=v;document.querySelectorAll('[data-t]').forEach(el=>{const value=tr(el.dataset.t);if(typeof value==='string')el.textContent=value});$('ruBtn').style.background=v==='ru'?'var(--accent)':'transparent';$('enBtn').style.background=v==='en'?'var(--accent)':'transparent';persistSettings();render()}
+function format(n){if(!Number.isFinite(n))throw Error('range');if(Object.is(n,-0))n=0;return Number(n.toPrecision(12)).toString()}
+function tokenize(source){
+ if(typeof source!=='string'||source.length>256)throw Error('length');
+ const s=source.replace(/[×]/g,'*').replace(/[÷]/g,'/').replace(/[−]/g,'-').replace(/,/g,'.').replace(/\s+/g,'');
  const tokens=[];let i=0;
- while(i<s.length){const c=s[i];if(/[0-9.]/.test(c)){let start=i,dots=0;while(i<s.length&&/[0-9.]/.test(s[i])){if(s[i]==='.')dots++;if(dots>1)throw Error('number');i++}const raw=s.slice(start,i);if(raw==='.')throw Error('number');tokens.push({type:'num',value:Number(raw)});continue}
- if('+-*/()%'.includes(c)){tokens.push({type:c});i++;continue}throw Error('character')}
+ while(i<s.length){if(tokens.length>128)throw Error('tokens');const c=s[i];
+  if(/[0-9.]/.test(c)){const start=i;let dots=0;while(i<s.length&&/[0-9.]/.test(s[i])){if(s[i]==='.')dots++;if(dots>1)throw Error('number');i++}const raw=s.slice(start,i);if(raw==='.'||!Number.isFinite(Number(raw)))throw Error('number');tokens.push({type:'num',value:Number(raw)});continue}
+  if('+-*/()%'.includes(c)){tokens.push({type:c});i++;continue}throw Error('character');
+ }
  return tokens;
 }
-function calculate(src){
- const ts=tokenize(src);let p=0;
- const peek=()=>ts[p];const take=t=>{if(peek()&&peek().type===t){p++;return true}return false};
- function primary(){if(take('num'))return ts[p-1].value;if(take('(')){const v=add();if(!take(')'))throw Error('bracket');return v}throw Error('value')}
+function calculate(source){
+ const ts=tokenize(source);let p=0,depth=0;
+ const peek=()=>ts[p];const take=type=>{if(peek()&&peek().type===type){p++;return true}return false};
+ function primary(){if(take('num'))return ts[p-1].value;if(take('(')){if(++depth>32)throw Error('depth');const v=add();if(!take(')'))throw Error('bracket');depth--;return v}throw Error('value')}
  function unary(){if(take('+'))return unary();if(take('-'))return -unary();return postfix()}
  function postfix(){let v=primary();while(take('%'))v/=100;return v}
- function mul(){let v=unary();while(peek()&&['*','/'].includes(peek().type)){const op=ts[p++].type,b=unary();if(op==='/'&&b===0)throw Error('zero');v=op==='*'?v*b:v/b}return v}
- function add(){let v=mul();while(peek()&&['+','-'].includes(peek().type)){const op=ts[p++].type,b=mul();v=op==='+'?v+b:v-b}return v}
- if(!ts.length)throw Error('empty');const value=add();if(p!==ts.length)throw Error('tail');if(!Number.isFinite(value))throw Error('range');return value;
+ function mul(){let v=unary();while(peek()&&['*','/'].includes(peek().type)){const op=ts[p++].type,b=unary();if(op==='/'&&b===0)throw Error('zero');v=op==='*'?v*b:v/b;if(!Number.isFinite(v))throw Error('range')}return v}
+ function add(){let v=mul();while(peek()&&['+','-'].includes(peek().type)){const op=ts[p++].type,b=mul();v=op==='+'?v+b:v-b;if(!Number.isFinite(v))throw Error('range')}return v}
+ if(!ts.length)throw Error('empty');const value=add();if(p!==ts.length||depth!==0)throw Error('tail');if(!Number.isFinite(value))throw Error('range');return value;
 }
+function preview(){try{return expression?format(calculate(expression)):'0'}catch{return '…'}}
 function render(){
- $('expression').textContent=expression||' ';$('result').textContent='0';$('displayStatus').textContent='GERA / READY';
- if(expression){try{$('result').textContent=format(calculate(expression));$('displayStatus').textContent='GERA / PREVIEW'}catch{$('result').textContent='…';$('displayStatus').textContent='GERA / INPUT'}} 
- $('historyCount').textContent=tr('count')(history.length);
- const list=$('historyList');list.innerHTML='';
+ $('expression').textContent=expression||' ';$('result').textContent=preview();$('displayStatus').textContent=!expression?'GERA / READY':$('result').textContent==='…'?'GERA / INPUT':'GERA / PREVIEW';
+ $('historyCount').textContent=tr('count')(history.length);$('memoryRow').classList.toggle('has-memory',hasMemory);
+ const list=$('historyList');list.replaceChildren();
  if(!history.length){const e=document.createElement('div');e.className='empty';e.textContent=tr('empty');list.append(e)}
- history.slice(0,30).forEach(item=>{const b=document.createElement('button');b.className='history-item';const left=document.createElement('span');left.className='history-expression';left.textContent=item.expression;const right=document.createElement('span');right.className='history-result';right.textContent='= '+item.result;b.append(left,right);b.addEventListener('click',()=>{expression=item.expression;justEvaluated=false;render()});list.append(b)});
+ history.slice(0,30).forEach(item=>{const b=document.createElement('button');b.className='history-item';b.type='button';const left=document.createElement('span');left.className='history-expression';left.textContent=item.expression;const right=document.createElement('span');right.className='history-result';right.textContent='= '+item.result;b.append(left,right);b.addEventListener('click',()=>{expression=item.expression;justEvaluated=false;render()});list.append(b)});
 }
-function saveHistory(){try{localStorage.setItem('calculator-history',JSON.stringify(history.slice(0,30)))}catch{}}
+function saveHistory(){try{localStorage.setItem(STORAGE.history,JSON.stringify(history.slice(0,30)))}catch{toast(language==='ru'?'Не удалось сохранить историю':'Could not save history')}}
 function addValue(v){
  if(justEvaluated&&/[0-9.(]/.test(v))expression='';
  justEvaluated=false;
  if(v==='()'){const opens=(expression.match(/\(/g)||[]).length,closes=(expression.match(/\)/g)||[]).length;v=opens>closes?')':'('}
- if(v==='.') {const last=expression.split(/[+−×÷()%]/).pop();if(last.includes('.'))return;if(!last) v='0.'}
+ if(v==='.') {const last=expression.split(/[+−×÷()%]/).pop();if(last.includes('.'))return;if(!last||/[+−×÷(]$/.test(expression))v='0.'}
  if(/[+−×÷]/.test(v)&&/[+−×÷]$/.test(expression))expression=expression.slice(0,-1);
+ if(expression.length>=256){toast(language==='ru'?'Слишком длинное выражение':'Expression is too long');return}
  expression+=v;render();
 }
+function currentValue(){try{return calculate(expression||'0')}catch{return null}}
 function equals(){
  if(!expression.trim())return;
- try{const value=calculate(expression),result=format(value);history.unshift({expression,result,at:Date.now()});history=history.slice(0,30);saveHistory();expression=result;justEvaluated=true;$('owlAvatar').textContent='🦉';$('owlStatus').textContent='GERA / DONE';$('owlTitle').textContent=tr('calculated');$('owlMessage').textContent=expression+' = '+result;render();$('displayStatus').textContent='GERA / RESULT';}
- catch{$('owlStatus').textContent='GERA / ERROR';$('owlTitle').textContent=tr('error');$('owlMessage').textContent=language==='ru'?'Подсказка: проверь скобки, операторы и деление на ноль.':'Tip: check brackets, operators and division by zero.';toast(tr('error'))}
+ try{const result=format(calculate(expression)),source=expression;history.unshift({expression:source,result,at:Date.now()});history=history.slice(0,30);saveHistory();expression=result;justEvaluated=true;$('owlStatus').textContent='GERA / DONE';$('owlTitle').textContent=tr('calculated');$('owlMessage').textContent=source+' = '+result;render();$('displayStatus').textContent='GERA / RESULT'}
+ catch{$('owlStatus').textContent='GERA / ERROR';$('owlTitle').textContent=tr('error');$('owlMessage').textContent=language==='ru'?'Проверь скобки, операторы и деление на ноль.':'Check brackets, operators and division by zero.';toast(tr('error'))}
 }
-function clearAll(){expression='';justEvaluated=false;render();$('owlTitle').textContent=tr('hello');$('owlMessage').textContent=tr('ready')}
-function updateLanguage(){document.documentElement.lang=language;document.querySelectorAll('[data-t]').forEach(el=>el.textContent=tr(el.dataset.t));$('ruBtn').style.background=language==='ru'?'var(--accent)':'transparent';$('enBtn').style.background=language==='en'?'var(--accent)':'transparent';render()}
-$('keypad').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const action=b.dataset.action;if(action==='clear'){clearAll();return}if(action==='backspace'){expression=expression.slice(0,-1);justEvaluated=false;render();return}if(action==='equals'){equals();return}if(b.dataset.value)addValue(b.dataset.value)});
-$('cleanBtn').addEventListener('click',()=>{if(!history.length){toast(tr('cleared'));clearAll();return}if(confirm(tr('clearConfirm'))){history=[];saveHistory();clearAll();toast(tr('cleared'))}});
-$('settingsOpen').addEventListener('click',()=>$('settingsBackdrop').classList.add('open'));$('settingsClose').addEventListener('click',()=>$('settingsBackdrop').classList.remove('open'));$('settingsBackdrop').addEventListener('click',e=>{if(e.target===$('settingsBackdrop'))$('settingsBackdrop').classList.remove('open')});document.addEventListener('keydown',e=>{if(e.key==='Escape')$('settingsBackdrop').classList.remove('open')});
+function clearAll(){expression='';justEvaluated=false;render();$('owlStatus').textContent='GERA / READY';$('owlTitle').textContent=tr('hello');$('owlMessage').textContent=tr('ready')}
+function backspace(){expression=expression.slice(0,-1);justEvaluated=false;render()}
+function changeSign(){if(!expression)return;try{expression=format(-calculate(expression));justEvaluated=false;render()}catch{if(expression.startsWith('-'))expression=expression.slice(1);else expression='-'+expression;render()}}
+function memoryAction(action){const value=currentValue();if(action==='mc'){memory=0;hasMemory=false;toast(tr('memoryClear'))}else if(action==='mr'){if(!hasMemory){toast(tr('memoryEmpty'));return}expression=format(memory);justEvaluated=false;render()}else{if(value===null){toast(tr('error'));return}memory=action==='mplus'?memory+value:memory-value;if(!Number.isFinite(memory)){toast(tr('error'));return}hasMemory=true;toast(tr('memorySaved'))}persistSettings()}
+async function copyResult(){const value=preview();if(value==='…'||!expression){toast(tr('error'));return}try{await navigator.clipboard.writeText(value);toast(tr('copied'))}catch{const area=document.createElement('textarea');area.value=value;area.style.position='fixed';area.style.opacity='0';document.body.append(area);area.select();try{document.execCommand('copy');toast(tr('copied'))}catch{toast(language==='ru'?'Копирование недоступно':'Copy is unavailable')}area.remove()}}
+function clearHistory(){if(!history.length){toast(tr('cleared'));clearAll();return}if(confirm(tr('clearConfirm'))){history=[];saveHistory();clearAll();toast(tr('cleared'))}}
+$('keypad').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const action=b.dataset.action;if(action==='clear')clearAll();else if(action==='backspace')backspace();else if(action==='equals')equals();else if(action==='sign')changeSign();else if(b.dataset.value)addValue(b.dataset.value)});
+$('memoryRow').addEventListener('click',e=>{const b=e.target.closest('button');if(b?.dataset.action)memoryAction(b.dataset.action)});
+$('cleanBtn').addEventListener('click',clearHistory);$('copyResult').addEventListener('click',copyResult);
+$('settingsOpen').addEventListener('click',()=>$('settingsBackdrop').classList.add('open'));$('settingsClose').addEventListener('click',()=>$('settingsBackdrop').classList.remove('open'));
+$('settingsBackdrop').addEventListener('click',e=>{if(e.target===$('settingsBackdrop'))$('settingsBackdrop').classList.remove('open')});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){$('settingsBackdrop').classList.remove('open');if(!e.ctrlKey&&!e.metaKey&&!e.altKey)clearAll()}});
 document.querySelectorAll('.color-btn').forEach(b=>b.addEventListener('click',()=>setAccent(b.dataset.color)));
-$('ruBtn').addEventListener('click',()=>{language='ru';updateLanguage()});$('enBtn').addEventListener('click',()=>{language='en';updateLanguage()});
-document.addEventListener('keydown',e=>{if(e.ctrlKey||e.metaKey||e.altKey)return;if(/^[0-9]$/.test(e.key)){addValue(e.key);return}const map={'.':'.',',':'.','+':'+','-':'−','*':'×','/':'÷','%':'%','(':'(',')':')'};if(map[e.key]){e.preventDefault();addValue(map[e.key]);return}if(e.key==='Enter'||e.key==='='){e.preventDefault();equals()}if(e.key==='Backspace'){expression=expression.slice(0,-1);justEvaluated=false;render()}if(e.key==='Escape')clearAll()});
-try{const saved=JSON.parse(localStorage.getItem('calculator-history')||'[]');if(Array.isArray(saved))history=saved.filter(x=>x&&typeof x.expression==='string'&&typeof x.result==='string').slice(0,30)}catch{history=[]}
-setTheme();setAccent(accent);updateLanguage();render();
-if(window.matchMedia){const mq=window.matchMedia('(prefers-color-scheme: dark)');mq.addEventListener?.('change',setTheme)}
+$('ruBtn').addEventListener('click',()=>setLanguage('ru'));$('enBtn').addEventListener('click',()=>setLanguage('en'));
+$('autoTheme').addEventListener('click',()=>setTheme('auto'));$('lightTheme').addEventListener('click',()=>setTheme('light'));$('darkTheme').addEventListener('click',()=>setTheme('dark'));
+document.addEventListener('keydown',e=>{if(e.ctrlKey||e.metaKey||e.altKey)return;if(/^[0-9]$/.test(e.key)){addValue(e.key);return}const map={'.':'.',',':'.','+':'+','-':'−','*':'×','/':'÷','%':'%','(':'(',')':')'};if(map[e.key]){e.preventDefault();addValue(map[e.key]);return}if(e.key==='Enter'||e.key==='='){e.preventDefault();equals();return}if(e.key==='Backspace'){e.preventDefault();backspace()}});
+const stored=safeRead(STORAGE.history,[]);if(Array.isArray(stored))history=stored.filter(x=>x&&typeof x.expression==='string'&&x.expression.length<=256&&typeof x.result==='string'&&x.result.length<=64&&Number.isFinite(x.at)).slice(0,30);
+setAccent(accent);setTheme(theme);setLanguage(language);render();
+if(window.matchMedia){const mq=matchMedia('(prefers-color-scheme: dark)');mq.addEventListener?.('change',()=>{if(theme==='auto')setTheme('auto')})}
 })();
 </script>
 </body></html>
